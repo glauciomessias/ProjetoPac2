@@ -1,0 +1,92 @@
+package novo;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class PacbolaTest {
+
+	@Test
+	public void telaInicial() {
+		Jogo jogo = new Jogo();
+		assertEquals("|O        *|", jogo.getTela());
+	}
+	
+	@Test
+	public void segundoFrame() {
+		Jogo jogo = new Jogo();
+		jogo.esperar();
+		assertEquals("| <       *|", jogo.getTela());
+	}
+	
+	@Test
+	public void comerAFrutaDaDireita() {
+		Jogo jogo = new Jogo();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		assertEquals("|*        <|", jogo.getTela());
+	}
+	
+	@Test
+	public void deveMudarDirecaoParaEsquerda() {
+		Jogo jogo = new Jogo();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esquerda();
+		jogo.esperar();
+		assertEquals("| >       *|", jogo.getTela());
+	}
+	
+	@Test
+	public void deveMudarDirecaoParaDireita() {
+		Jogo jogo = new Jogo();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esquerda();
+		jogo.esperar();
+		jogo.direita();
+		jogo.esperar();
+		jogo.esperar();
+		assertEquals("|   <     *|", jogo.getTela());
+	}
+	
+	@Test
+	public void quandoComerFrutaDeUmLadoApareceDoOutro() {
+		Jogo jogo = new Jogo();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esquerda();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		
+		assertEquals("|O        *|", jogo.getTela());
+	}
+	
+}

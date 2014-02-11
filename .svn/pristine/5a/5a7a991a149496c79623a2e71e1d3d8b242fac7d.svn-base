@@ -1,0 +1,30 @@
+package novo;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class PacbolaTest {
+
+	@Test
+	public void telaInicialdoJogoDeveSerAssim() {
+		Jogo jogo = new Jogo();
+		assertEquals("O   ", jogo.getTela());
+	}
+	
+	@Test
+	public void telaSegundaDoJogoDeveConter() {
+		Jogo jogo = new Jogo();
+		jogo.andar();
+		assertEquals(" O  ", jogo.getTela());
+	}
+	
+	@Test
+	public void telaTerceiraDoJogoDeveConter() {
+		Jogo jogo = new Jogo();
+		jogo.andar();
+		jogo.andar();
+		assertEquals("  O ", jogo.getTela());
+	}
+
+}

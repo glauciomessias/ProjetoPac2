@@ -1,0 +1,68 @@
+package novo;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class PacbolaTest {
+
+	@Test
+	public void telaInicialdoJogoDeveSerAssim() {
+		Jogo jogo = new Jogo(1, 10);
+		assertEquals("|O        *|", jogo.getTela());
+	}
+	
+	@Test
+	public void telaSegundaDoJogoDeveConter() {
+		Jogo jogo = new Jogo(1, 10);
+		jogo.esperar();
+		assertEquals("| C       *|", jogo.getTela());
+	}
+	
+	@Test
+	public void deveIrAoUltimoPassoDoJogo() {
+		Jogo jogo = new Jogo(1, 10);
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esperar();
+		assertEquals("|         C|", jogo.getTela());
+	}
+	
+	@Test
+	public void deveMudarDirecaoParaEsquerda() {
+		Jogo jogo = new Jogo(1, 10);
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esquerda();
+		jogo.esperar();
+		assertEquals("| Ɔ       *|", jogo.getTela());
+	}
+	
+	@Test
+	public void deveMudarDirecaoParaDireita() {
+		Jogo jogo = new Jogo(1, 10);
+		jogo.esperar();
+		jogo.esperar();
+		jogo.esquerda();
+		jogo.esperar();
+		jogo.direita();
+		jogo.esperar();
+		jogo.esperar();
+		assertEquals("|   C     *|", jogo.getTela());
+	}
+	
+	
+	@Test
+	public void deveTerUmaFrutinhaEmQualquerLugarDaTela() {
+		Jogo jogo = new Jogo(1, 10);
+		assertTrue(jogo.getTela().contains("*"));
+	}
+}

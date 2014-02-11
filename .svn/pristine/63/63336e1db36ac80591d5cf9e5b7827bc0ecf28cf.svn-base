@@ -1,0 +1,105 @@
+package novo;
+
+public class Jogo {
+	
+	private int altura;
+	private int largura;
+	private String area;
+	
+
+	public Jogo(int altura, int largura) {
+		this.altura = altura;
+		this.largura = largura;
+		this.area = criarArea();
+	}
+	
+	private String criarArea() {
+		StringBuilder area = new StringBuilder();
+		String linha = criarLinha();
+		
+		for (int i = 0; i < altura; i++) {
+			area.append(linha + "\n");
+		}
+		
+		return area.toString();
+	}
+
+	private String criarLinha() {
+		StringBuilder linha = new StringBuilder();
+		
+		for (int i = 0; i < largura; i++) {
+			linha.append(" ");
+		}
+		
+		return linha.toString();
+	}
+
+	private static final String LINHA = "          ";
+
+	private int posicao = 0;
+	private boolean direcao = true;
+	private boolean estado = true;
+	
+	public void esperar() {
+		
+		if(isDireita()) {
+			if(posicao < largura-1) {
+				posicao++;
+			}
+		} else if(isEsquerda()) {
+			if (posicao > 0) {
+				posicao--;
+			}
+		}
+		estado = !estado;
+ 	}
+	
+	public void descer() {
+		
+	}
+	
+	private boolean isDireita() {
+		return direcao;
+	}
+	
+	private boolean isEsquerda() {
+		return !direcao;
+	}
+
+	public String getTela() {
+		StringBuilder stringBuilder = new StringBuilder(getLinha());
+		stringBuilder.setCharAt(posicao, getBola());
+		return "|" + stringBuilder.toString() + "|";
+	}
+	
+	private char getBola() {
+		return estado ? 'O' : (direcao ? 'C' : '\u0186');
+	}
+	
+	private String getLinha() {
+		return LINHA;
+	}
+
+	public void esquerda() {
+		direcao = false;		
+	}
+
+	public void direita() {
+		direcao = true;
+	}
+
+	public int getAltura() {
+		return altura;
+	}
+
+	public int getLargura() {
+		return largura;
+	}
+
+	public String getArea() {
+		return area;
+	}
+	
+	
+	
+}

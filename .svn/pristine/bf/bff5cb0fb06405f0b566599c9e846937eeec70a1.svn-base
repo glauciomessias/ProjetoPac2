@@ -1,0 +1,83 @@
+package novo;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class PacbolaTest {
+
+	private final Jogo jogo = new Jogo();
+
+	@Test
+	public void telaInicial() {
+		tela("|O------------------*|");
+	}
+
+	@Test
+	public void segundoFrame() {
+		espera();
+		tela("| <-----------------*|");
+	}
+	
+	@Test
+	public void deveComerTodasAsFrutas() {
+		espera(21);
+		tela("|@                  <|");
+	}
+	
+	@Test
+	public void deveMudarDirecaoParaEsquerda() {
+		espera();
+		espera();
+		esquerda();
+		espera();
+		tela("| > ----------------*|");
+	}
+
+	@Test
+	public void deveMudarDirecaoParaDireita() {
+		espera(2);
+		esquerda();
+		espera();
+		direita();
+		espera(2);
+		tela("|   <---------------*|");
+	}
+	
+	@Test
+	public void deveComerTodasAsFrutasEVoltarParaOInicio() {
+		espera(21);
+		esquerda();
+		espera(21);		
+		tela("|O                   |");
+	}
+
+	@Test
+	public void deveAparecerOFantasma() {
+		espera(5);
+		tela("|@    <-------------*|");
+	}
+	
+	
+	private void tela(String esperada) {
+		assertEquals(esperada, jogo.getTela());
+	}
+	
+	private void esquerda() {
+		jogo.esquerda();
+	}
+	
+	private void espera(int vezes) {
+		while (vezes-- != 0)
+			espera();
+	}
+	
+	private void direita() {
+		jogo.direita();
+	}
+	
+	private void espera() {
+		jogo.esperar();
+	}
+}
+

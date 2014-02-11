@@ -1,0 +1,39 @@
+package novo;
+
+import static java.awt.event.KeyEvent.VK_ESCAPE;
+import static java.awt.event.KeyEvent.VK_LEFT;
+import static java.awt.event.KeyEvent.VK_RIGHT;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JFrame;
+
+public class MainLoop {
+
+	public static void main(String[] args) throws InterruptedException {
+		JFrame frame = new JFrame();
+		frame.setVisible(true);
+		final Jogo jogo = new Jogo();
+		
+		frame.addKeyListener(new KeyAdapter() { @Override public void keyPressed(KeyEvent e) { int key = e.getKeyCode();
+			if (key == VK_LEFT) jogo.esquerda();
+			if (key == VK_RIGHT) jogo.direita();
+			if (key == VK_ESCAPE) System.exit(0);
+		}});
+		
+		while(true) {
+			jogo.esperar();
+			frame(jogo.getTela());
+			Thread.sleep(200);
+		}
+
+	}
+
+	private static void frame(String frame) throws InterruptedException {
+		System.out.println("\n\n\n\n\n");
+		System.out.println(frame);
+		System.out.println("\n\n\n\n\n");
+	}
+
+}

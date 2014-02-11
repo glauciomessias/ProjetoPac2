@@ -1,0 +1,63 @@
+package novo;
+
+public class Jogo {
+	
+	private final int COMECO_DA_LINHA = 0;
+	private final int FINAL_DA_LINHA = 9;
+	
+	private char[] mapa = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
+	private int posicao = 0;
+	private boolean isDireita = true;
+	private boolean aparencia = false;
+	
+	public Jogo() {
+		atualizarMapa(0);
+	}
+	
+	public void esperar() {
+		int posicaoAnterior = posicao;
+		if(isDireita) {
+			if(posicao < 9) {
+				posicao++;
+			}
+		} else if(!isDireita) {
+			if (posicao > 0) {
+				posicao--;
+			}
+		}
+		atualizarMapa(posicaoAnterior);
+ 	}
+
+	private void atualizarMapa(int posicaoAnterior) {
+		mudarAparencia();
+		char bola = aparencia();
+		mapa[posicaoAnterior] = ' ';
+		mapa[posicao] = bola;
+		if(posicao == FINAL_DA_LINHA) {
+			mapa[0] = '*';
+		} else if(posicao == COMECO_DA_LINHA) {
+			mapa[9] = '*';
+		}
+	}
+
+	private char aparencia() {
+		return aparencia ? 'O' : (isDireita ? '<' : '>');
+	}
+
+	private void mudarAparencia() {
+		aparencia = !aparencia;
+	}
+	
+	public String getTela() {
+		StringBuilder tela = new StringBuilder();
+		return "|" + tela.append(mapa).toString() + "|";
+	}
+
+	public void esquerda() {
+		isDireita = false;		
+	}
+
+	public void direita() {
+		isDireita = true;
+	}
+}

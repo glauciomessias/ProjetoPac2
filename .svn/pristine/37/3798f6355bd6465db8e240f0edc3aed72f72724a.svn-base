@@ -1,0 +1,27 @@
+package novo;
+
+public class Jogo {
+	
+	private static final String LINHA = "    ";
+
+	private int posicao = 0;
+	
+	public void andar() {
+		if(posicao < 3){
+			posicao++;
+		} else {
+			posicao = 0;
+		}
+	}
+
+	public String getTela() {
+		StringBuilder stringBuilder = new StringBuilder(getLinha());
+		stringBuilder.setCharAt(posicao, 'O');
+		return stringBuilder.toString();
+	}
+	
+	private String getLinha() {
+		return LINHA;
+	}
+	
+}

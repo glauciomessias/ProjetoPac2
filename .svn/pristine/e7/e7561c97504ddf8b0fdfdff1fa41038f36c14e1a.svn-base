@@ -1,0 +1,66 @@
+package pacmanclandestino.mapa;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Mapa {
+	
+	private int WIDTH = 40;
+	private int HEIGHT = 10;
+	
+	private final int baixo = 0;
+	private final int cima = 1;
+	private final int esquerda = 2;
+	private final int direita = 3;
+	
+	private int direcaoAtual = 0;
+	private int xAtual = 0;
+	private int yAtual = 0;
+	
+	private Scanner s = new Scanner(System.in);
+
+	private void run() throws Exception {
+		while(true) {
+			Thread.sleep(100);
+			switch(direcaoAtual) {
+				case baixo:
+					xAtual += 1;
+					break;
+				case cima:
+					xAtual -= 1;
+					break;
+			}
+			
+			print(xAtual, yAtual);
+			int novadir = s.nextByte();
+			switch(novadir) {
+				case 89:
+					direcaoAtual = 0;
+				case 87:
+					direcaoAtual = 1;
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws Exception {
+		new Mapa().run();
+	}
+	
+	private void print(int x, int y) {
+		for (int i = 0; i < 80; i++) {
+			String[] linha = new String[80];
+			Arrays.fill(linha, " ");
+			if(i == x) {
+				linha[y] = String.valueOf((char) 65);
+			}
+			printLine(linha);
+		}
+	}
+
+	private void printLine(String[] linha) {
+		for (int i = 0; i < linha.length; i++) {
+			System.out.print(linha[i]);
+		}
+	}
+
+}

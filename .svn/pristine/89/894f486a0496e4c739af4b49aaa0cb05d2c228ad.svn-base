@@ -1,0 +1,59 @@
+package novo;
+
+import java.util.Arrays;
+
+public class Jogo {
+	
+	private int LARGURA = 20;
+	private char[] mapa;
+	private int posicao = 0;
+	private boolean isDireita = true;
+	private boolean isBocaFechada = false;
+	
+	public Jogo() {
+		mapa = new char[LARGURA];
+		Arrays.fill(mapa, '-');
+		mapa[0] = proximaAparencia();
+		mapa[finalDaLinha()] = '*';
+	}
+	
+	public void esperar() {
+		int posicaoAnterior = posicao;
+		if (isDireita) {
+			if (posicao < finalDaLinha()) posicao++;
+		} else
+			if (posicao > 0) posicao--;
+		atualizarMapa(posicaoAnterior);
+ 	}
+
+	
+	private void atualizarMapa(int posicaoAnterior) {
+		mapa[posicaoAnterior] = ' ';
+		mapa[posicao] = proximaAparencia();
+		
+		if(posicao == 4){
+			mapa[0] = '@';
+		}
+	}
+
+	
+	private int finalDaLinha() {
+		return mapa.length - 1;
+	}
+
+	
+	private char proximaAparencia() {
+		isBocaFechada = !isBocaFechada;
+		return isBocaFechada ? 'O' : (isDireita ? '<' : '>');
+	}
+
+	
+	public String getTela() {
+		StringBuilder tela = new StringBuilder();
+		return "|" + tela.append(mapa).toString() + "|";
+	}
+
+	
+	public void esquerda() { isDireita = false;	}
+	public void  direita() { isDireita = true;  }
+}

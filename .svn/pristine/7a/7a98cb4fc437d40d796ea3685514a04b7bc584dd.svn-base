@@ -1,0 +1,15 @@
+package novo;
+
+public class MainLoop {
+
+	public static void main(String[] args) {
+		Jogo jogo = new Jogo();
+		while(true){
+			jogo.andar();
+			System.out.println(jogo.getTela());
+		}
+		
+
+	}
+
+}

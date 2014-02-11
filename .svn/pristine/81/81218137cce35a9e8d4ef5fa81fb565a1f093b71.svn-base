@@ -1,0 +1,54 @@
+package novo;
+
+public class Jogo {
+	
+	private static final String LINHA = "          ";
+
+	private int posicao = 0;
+	private boolean direcao = true;
+	private boolean estado = true;
+	
+	public void andar() {
+		if(isDireita()) {
+			if(posicao < LINHA.length()-1) {
+				posicao++;
+			}
+		} else if(isEsquerda()) {
+			if (posicao > 0) {
+				posicao--;
+			}
+		}
+		estado = !estado;
+ 	}
+	
+	private boolean isDireita() {
+		return direcao;
+	}
+	
+	private boolean isEsquerda() {
+		return !direcao;
+	}
+
+	public String getTela() {
+		StringBuilder stringBuilder = new StringBuilder(getLinha());
+		stringBuilder.setCharAt(posicao, getBola());
+		return "|" + stringBuilder.toString() + "|";
+	}
+	
+	private char getBola() {
+		return estado ? 'O' : 'C';
+	}
+	
+	private String getLinha() {
+		return LINHA;
+	}
+
+	public void mudarParaEsquerda() {
+		direcao = false;		
+	}
+
+	public void mudarParaDireita() {
+		direcao = true;
+	}
+	
+}
